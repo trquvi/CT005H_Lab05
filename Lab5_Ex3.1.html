@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Lab5_Ex3.1 — Công Nghệ Số: Infographic & Video</title>
+    <meta name="description" content="Lab5_Ex3.1: Hiển thị infographic và video YouTube minh họa lợi ích của công nghệ số trong giáo dục.">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+      :root{--bg:#0f1419;--card:#1a1f2e;--accent:#7c3aed;--accent-light:#a78bfa;--muted:#2d333f;--text:#f0f4f8;--text-muted:#b0b8c1}
+      *{box-sizing:border-box}
+      html,body{height:100%;margin:0}
+      body{font-family:Poppins,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text)}
+      .wrap{max-width:1200px;margin:0 auto;padding:28px 20px;min-height:100vh;display:flex;flex-direction:column}
+      header{background:linear-gradient(135deg,rgba(124,58,237,0.1),rgba(167,139,250,0.05));padding:28px;border-radius:16px;border:1px solid rgba(124,58,237,0.1);margin-bottom:28px}
+      .brand{display:flex;gap:16px;align-items:center;margin-bottom:8px}
+      .logo{width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-light));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:24px;box-shadow:0 8px 24px rgba(124,58,237,0.3)}
+      h1{font-size:1.4rem;margin:0;color:var(--text)}
+      .subtitle{color:var(--text-muted);font-size:0.95rem;margin:0}
+      .source{color:var(--accent-light);font-size:0.9rem;font-style:italic;margin-top:4px}
+      .card{background:var(--card);padding:24px;border-radius:16px;margin-bottom:20px;border:1px solid rgba(124,58,237,0.1);box-shadow:0 20px 60px rgba(0,0,0,0.3)}
+      .grid{display:grid;grid-template-columns:1fr;gap:24px}
+      h2{font-size:1.2rem;margin:0 0 12px;color:var(--accent-light)}
+      h3{font-size:1.1rem;margin:0 0 12px;color:var(--accent-light)}
+      .meta{color:var(--text-muted);font-size:0.95rem;line-height:1.5}
+      .media{border-radius:12px;overflow:hidden;background:var(--muted);position:relative}
+      .infographic{width:100%;height:auto;display:block}
+      .upload-box{padding:40px 24px;border:2px dashed rgba(124,58,237,0.3);border-radius:12px;text-align:center;cursor:pointer;transition:all 0.3s;background:rgba(124,58,237,0.02)}
+      .upload-box:hover{border-color:var(--accent);background:rgba(124,58,237,0.08)}
+      .upload-box input{display:none}
+      .upload-label{cursor:pointer;display:block}
+      .video-thumb{width:100%;position:relative;padding-top:56.25%;background:#000;border-radius:12px;overflow:hidden;cursor:pointer;transition:transform 0.3s}
+      .video-thumb:hover{transform:scale(1.02)}
+      .video-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+      .play-btn{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);transition:background 0.3s}
+      .video-thumb:hover .play-btn{background:rgba(0,0,0,0.5)}
+      .play-icon{width:80px;height:80px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(124,58,237,0.4)}
+      .play-icon svg{width:40px;height:40px;fill:#fff;margin-left:4px}
+      .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+      .btn{background:linear-gradient(135deg,var(--accent),var(--accent-light));color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:600;border:none;cursor:pointer;transition:all 0.3s;font-size:0.95rem}
+      .btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(124,58,237,0.3)}
+      .btn-ghost{background:transparent;border:1.5px solid var(--accent);color:var(--accent);padding:10px 18px;border-radius:8px;text-decoration:none;cursor:pointer;transition:all 0.3s;font-size:0.95rem}
+      .btn-ghost:hover{background:rgba(124,58,237,0.1)}
+      footer{color:var(--text-muted);font-size:0.85rem;text-align:center;border-top:1px solid rgba(124,58,237,0.1);padding-top:20px;margin-top:auto;line-height:1.6}
+      footer strong{color:var(--accent-light)}
+      .video-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:1000;align-items:center;justify-content:center;padding:20px}
+      .video-modal.open{display:flex}
+      .video-modal iframe{width:90%;max-width:1000px;height:56.25vw;max-height:80vh;border:0;border-radius:12px}
+      .close-modal{position:absolute;top:20px;right:20px;background:var(--accent);color:#fff;border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:24px;transition:all 0.3s}
+      .close-modal:hover{background:var(--accent-light)}
+      @media(min-width:900px){.grid{grid-template-columns:1fr 1fr}}
+      @media(max-width:600px){h1{font-size:1.2rem;} .actions{flex-direction:column} .btn,.btn-ghost{width:100%}}
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <div class="brand">
+          <div class="logo">CT</div>
+          <div>
+            <h1>Lab5_Ex3.1 — Công Nghệ Số</h1>
+            <p class="subtitle">Infographic & Video — Nội dung đa phương tiện</p>
+            <p class="source">✨ Tạo bằng: GitHub Copilot (AI)</p>
+          </div>
+        </div>
+      </header>
+
+      <section class="card">
+        <div class="grid">
+          <div>
+            <h2>📊 Infographic</h2>
+            <p class="meta">Lợi ích của công nghệ số trong giáo dục: tiếp cận thông tin, học tập cá nhân hóa, thúc đẩy sáng tạo.</p>
+            
+            <div class="media" id="img-container">
+              <img id="infographic-img" class="infographic" src="infographic.png" alt="Infographic Công Nghệ Số">
+              <div class="upload-box" style="display:none" id="upload-box">
+                <label class="upload-label" for="file-input">
+                  <div style="font-size:3rem;margin-bottom:12px">📁</div>
+                  <div style="color:var(--accent-light);font-weight:600;margin-bottom:8px">Chọn ảnh infographic</div>
+                  <div style="color:var(--text-muted);font-size:0.9rem">PNG, JPG, GIF (tối đa 10MB)</div>
+                </label>
+                <input type="file" id="file-input" accept="image/*">
+              </div>
+            </div>
+
+            <div class="actions">
+              <button class="btn" id="download-btn" style="display:none" onclick="downloadImg()">⬇️ Tải ảnh</button>
+              <button class="btn-ghost" id="upload-btn">📤 Chọn ảnh từ máy</button>
+              <a class="btn-ghost" href="#video" onclick="scrollTo('video-thumb');return false">▶️ Xem video</a>
+            </div>
+          </div>
+
+          <div>
+            <h3>🎥 Video YouTube</h3>
+            <p class="meta">Video minh họa về công nghệ số trong giáo dục. Nhấn Play để phát video trong trang.</p>
+            
+            <div class="video-thumb" id="video-thumb" onclick="openVideo()">
+              <img src="https://img.youtube.com/vi/PoW-HjixW_s/maxresdefault.jpg" alt="Video thumbnail" onerror="this.src='https://img.youtube.com/vi/PoW-HjixW_s/hqdefault.jpg'">
+              <div class="play-btn">
+                <div class="play-icon">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+              </div>
+            </div>
+
+            <div class="actions">
+              <button class="btn" onclick="openVideo()">▶️ Phát video</button>
+              <a class="btn-ghost" href="https://www.youtube.com/watch?v=PoW-HjixW_s" target="_blank">🔗 YouTube</a>
+              <a class="btn-ghost" href="#" onclick="scrollTo('infographic-img');return false">⬆️ Quay lại</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <div>© 2026 — Nội dung & hình ảnh thuộc tác giả/nguồn tương ứng.</div>
+        <div style="margin-top:12px">File: <strong>Lab5_Ex3.1.html</strong> | Tạo bằng <strong>GitHub Copilot</strong><br>Prompt: "Viết code HTML hiển thị infographic và video Youtube trên trang web"</div>
+      </footer>
+    </div>
+
+    <!-- Video Modal -->
+    <div class="video-modal" id="video-modal">
+      <button class="close-modal" onclick="closeVideo()">✕</button>
+      <iframe src="https://www.youtube-nocookie.com/embed/PoW-HjixW_s?rel=0&autoplay=1" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+
+    <script>
+      // Video modal
+      function openVideo(){document.getElementById('video-modal').classList.add('open')}
+      function closeVideo(){document.getElementById('video-modal').classList.remove('open')}
+      document.addEventListener('keydown',e=>{if(e.key==='Escape')closeVideo()})
+      document.getElementById('video-modal').addEventListener('click',e=>{if(e.target.id==='video-modal')closeVideo()})
+      
+      // Image upload
+      var imgInput=document.getElementById('file-input');
+      var imgImg=document.getElementById('infographic-img');
+      var uploadBox=document.getElementById('upload-box');
+      var uploadBtn=document.getElementById('upload-btn');
+      var downloadBtn=document.getElementById('download-btn');
+      var currentImgUrl='';
+      
+      uploadBtn.addEventListener('click',()=>imgInput.click());
+      imgInput.addEventListener('change',function(){
+        if(!this.files||!this.files[0])return;
+        var f=this.files[0];
+        currentImgUrl=URL.createObjectURL(f);
+        imgImg.src=currentImgUrl;
+        uploadBox.style.display='none';
+        imgImg.style.display='block';
+        downloadBtn.style.display='inline-block';
+      });
+      imgImg.addEventListener('error',()=>{
+        imgImg.style.display='none';
+        uploadBox.style.display='block';
+        uploadBtn.textContent='📤 Chọn ảnh (không tìm thấy infographic.png)';
+      });
+      
+      function downloadImg(){
+        if(!currentImgUrl)return;
+        var a=document.createElement('a');
+        a.href=currentImgUrl;
+        a.download='infographic.png';
+        a.click();
+      }
+      
+      // Scroll helper
+      function scrollTo(id){document.getElementById(id).scrollIntoView({behavior:'smooth'})}
+    </script>
+  </body>
+</html>
