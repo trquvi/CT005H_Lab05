@@ -3,43 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lab5_Ex3.1 - Hiển thị nội dung số</title>
+    <title>Trang Giới Thiệu Cá Nhân - Sản Phẩm Của Tôi</title>
 
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f0f2f5;
-            padding: 20px;
-            text-align: center;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
         .container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: auto;
             background: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
         }
-        h1 {
-            color: #4f46e5;
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
         }
-        .desc {
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 50px 40px;
+        }
+        
+        .intro-section {
+            margin-bottom: 50px;
+            text-align: center;
+        }
+        
+        .intro-section h2 {
+            color: #333;
             margin-bottom: 20px;
-            color: #555;
+            font-size: 1.8em;
         }
-        .box-img {
-            margin: 20px 0;
-            border: 2px dashed #ccc;
-            padding: 10px;
+        
+        .intro-section p {
+            color: #666;
+            line-height: 1.8;
+            font-size: 1.05em;
+        }
+        
+        .products-section {
+            margin-top: 40px;
+        }
+        
+        .products-title {
+            text-align: center;
+            color: #333;
+            font-size: 2em;
+            margin-bottom: 40px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 20px;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .product-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid #e0e0e0;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+        }
+        
+        .product-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+        
+        .product-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+        
+        .product-card p {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .product-card a, .product-card button {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 25px;
             border-radius: 8px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background 0.3s ease;
         }
-        img {
+        
+        .product-card a:hover, .product-card button:hover {
+            background: #764ba2;
+        }
+        
+        .pdf-container {
+            margin-top: 20px;
+            min-height: 400px;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .pdf-container iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+        }
+        
+        .image-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .image-container img {
             max-width: 100%;
             height: auto;
-            display: block;
-            margin: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-        .box-video {
+        
+        .video-container {
             position: relative;
             padding-bottom: 56.25%;
             height: 0;
@@ -48,7 +170,8 @@
             background: #000;
             margin-top: 20px;
         }
-        iframe {
+        
+        .video-container iframe {
             position: absolute;
             top: 0;
             left: 0;
@@ -56,42 +179,165 @@
             height: 100%;
             border: none;
         }
-        .note {
-            font-size: 0.85em;
+        
+        .footer {
+            background: #f8f9fa;
+            padding: 30px 40px;
+            text-align: center;
             color: #666;
-            margin-top: 25px;
+            border-top: 2px solid #e0e0e0;
+        }
+        
+        .footer p {
+            margin: 5px 0;
+            font-size: 0.95em;
+        }
+        
+        .social-links {
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            margin: 0 10px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .social-links a:hover {
+            color: #764ba2;
         }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <h1>Lab5_Ex3.1: Công Nghệ Số</h1>
-
-        <p class="desc">
-            Trang web này hiển thị nội dung số bao gồm infographic và video YouTube,
-            nhằm minh họa vai trò của công nghệ số trong học tập hiện đại.
-        </p>
-
-        <h3>1. Infographic</h3>
-        <div class="box-img">
-            <img src="Lab05_Ex2.1.png.png" alt="Infographic Công Nghệ Số">
+        <!-- Header -->
+        <div class="header">
+            <h1>🎯 Giới Thiệu Cá Nhân</h1>
+            <p>Khám phá các sản phẩm và dự án của tôi</p>
         </div>
 
-        <h3>2. Video Minh Họa</h3>
-        <div class="box-video">
-            <iframe
-                src="https://www.youtube.com/embed/PoW-HjixW_s"
-                title="Video minh họa Công Nghệ Số"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
-            </iframe>
+        <!-- Content -->
+        <div class="content">
+            <!-- Introduction Section -->
+            <div class="intro-section">
+                <h2>Chào mừng bạn đến với trang cá nhân của tôi!</h2>
+                <p>
+                    Đây là không gian để chia sẻ các sản phẩm, dự án và những kiến thức mà tôi đã học được 
+                    trong quá trình học tập và phát triển kỹ năng. Tôi đam mê công nghệ web và luôn cố gắng 
+                    tạo ra những sản phẩm chất lượng cao với trải nghiệm người dùng tuyệt vời.
+                </p>
+            </div>
+
+            <!-- Products Section -->
+            <div class="products-section">
+                <div class="products-title">📦 Ba Sản Phẩm Chính</div>
+
+                <div class="products-grid">
+                    <!-- Product 1: PDF -->
+                    <div class="product-card">
+                        <div class="product-icon">📄</div>
+                        <h3>Tài Liệu PDF</h3>
+                        <p>
+                            Báo cáo chi tiết về các kiến thức web design, HTML5, CSS3 và JavaScript 
+                            được tổng hợp từ quá trình học tập.
+                        </p>
+                        <button onclick="document.getElementById('pdf-section').scrollIntoView({behavior: 'smooth'})">
+                            Xem PDF
+                        </button>
+                    </div>
+
+                    <!-- Product 2: Image/PNG -->
+                    <div class="product-card">
+                        <div class="product-icon">🖼️</div>
+                        <h3>Infographic Thiết Kế</h3>
+                        <p>
+                            Hình ảnh infographic chuyên nghiệp về công nghệ số được tạo bằng các công cụ 
+                            thiết kế hiện đại.
+                        </p>
+                        <button onclick="document.getElementById('image-section').scrollIntoView({behavior: 'smooth'})">
+                            Xem Hình
+                        </button>
+                    </div>
+
+                    <!-- Product 3: YouTube Video -->
+                    <div class="product-card">
+                        <div class="product-icon">🎥</div>
+                        <h3>Video Hướng Dẫn</h3>
+                        <p>
+                            Video giáo dục về công nghệ web và những xu hướng mới nhất trong lĩnh vực 
+                            phát triển ứng dụng web.
+                        </p>
+                        <button onclick="document.getElementById('video-section').scrollIntoView({behavior: 'smooth'})">
+                            Xem Video
+                        </button>
+                    </div>
+                </div>
+
+                <!-- PDF Product Section -->
+                <div id="pdf-section" style="margin-top: 50px; padding-top: 20px; border-top: 3px solid #667eea;">
+                    <h3 style="color: #667eea; margin-bottom: 20px;">📄 Sản Phẩm 1: Tài Liệu PDF</h3>
+                    <p style="color: #666; margin-bottom: 20px;">
+                        Dưới đây là tài liệu PDF về các kiến thức cơ bản đến nâng cao về phát triển web:
+                    </p>
+                    <div class="pdf-container">
+                        <iframe src="sample.pdf" title="Tài liệu PDF"></iframe>
+                    </div>
+                    <p style="color: #999; font-size: 0.9em; margin-top: 15px; text-align: center;">
+                        💡 <em>Ghi chú: Để xem PDF đầy đủ, vui lòng download file hoặc mở trong tab riêng</em>
+                    </p>
+                </div>
+
+                <!-- Image Product Section -->
+                <div id="image-section" style="margin-top: 50px; padding-top: 20px; border-top: 3px solid #667eea;">
+                    <h3 style="color: #667eea; margin-bottom: 20px;">🖼️ Sản Phẩm 2: Infographic Thiết Kế</h3>
+                    <p style="color: #666; margin-bottom: 20px;">
+                        Hình ảnh infographic chuyên nghiệp giới thiệu về công nghệ số trong giáo dục:
+                    </p>
+                    <div class="image-container">
+                        <img src="Lab05_Ex2.1.png.png" alt="Infographic Công Nghệ Số">
+                    </div>
+                    <p style="color: #999; font-size: 0.9em; margin-top: 15px; text-align: center;">
+                        💡 <em>Hình ảnh được tạo bằng Canva AI và Photoshop</em>
+                    </p>
+                </div>
+
+                <!-- Video Product Section -->
+                <div id="video-section" style="margin-top: 50px; padding-top: 20px; border-top: 3px solid #667eea;">
+                    <h3 style="color: #667eea; margin-bottom: 20px;">🎥 Sản Phẩm 3: Video Hướng Dẫn</h3>
+                    <p style="color: #666; margin-bottom: 20px;">
+                        Video giáo dục về công nghệ web hiện đại và những xu hướng phát triển mới nhất:
+                    </p>
+                    <div class="video-container">
+                        <iframe
+                            src="https://www.youtube.com/embed/PoW-HjixW_s"
+                            title="Video minh họa Công Nghệ Số"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <p style="color: #999; font-size: 0.9em; margin-top: 15px; text-align: center;">
+                        💡 <em>Nguồn: YouTube - Về công nghệ và phát triển web</em>
+                    </p>
+                </div>
+            </div>
         </div>
 
-        <p class="note">
-            Infographic được tạo bằng Canva AI, hình ảnh từ Unsplash (CC0).<br>
-            Mã nguồn HTML được hỗ trợ bởi GitHub Copilot (AI).
-        </p>
+        <!-- Footer -->
+        <div class="footer">
+            <p><strong>© 2026 - Trang Giới Thiệu Cá Nhân</strong></p>
+            <p>Tạo bằng HTML5, CSS3 và JavaScript với hỗ trợ từ GitHub Copilot (AI)</p>
+            <div class="social-links">
+                <a href="https://github.com" target="_blank">GitHub</a>
+                <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+                <a href="mailto:your.email@example.com">Email</a>
+            </div>
+            <p style="margin-top: 15px; font-size: 0.85em;">
+                Tất cả nội dung được tạo lần cuối: <strong>5 Tháng 2, 2026</strong>
+            </p>
+        </div>
     </div>
 </body>
 </html>
